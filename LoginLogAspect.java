@@ -78,4 +78,5 @@ private MongoTemplate mongoTemplate;
         logLogin.setIp(IpUtils.getIpAddr(request));
         mongoTemplate.insert(logLogin);
     }
+	//今天是个好日子
 }
