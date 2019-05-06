@@ -53,6 +53,7 @@ private MongoTemplate mongoTemplate;
             logLogin.setOperation(value);//保存获取的操作
         }
 
+//哈哈
         //获取请求的类名
         String className = joinPoint.getTarget().getClass().getName();
         //获取请求的方法名
