@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>会员注册_绿蚂蚁</title>
+    <meta name="robots" content="nofollow">
+    <meta http-equiv="x-ua-compatible" content="IE=7">
+    <link rel="shortcut icon" type="image/x-icon" href="http://www.lvmae.com//favicon.ico">
+    <link rel="bookmark" type="image/x-icon" href="http://www.lvmae.com//favicon.ico">
+    <link rel="stylesheet" type="text/css" href="http://www.lvmae.com/skin/default/index.css">
+    <link rel="stylesheet" type="text/css" href="http://www.lvmae.com/skin/default/index_plus.css">
+    <link rel="stylesheet" type="text/css" href="http://www.lvmae.com/skin/default/register.css">
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="http://www.lvmae.com/skin/default/ie6.css"/>
+    <![endif]-->
+    <!--[if IE]>
+    <style type="text/css">
+        .head_user em {margin:-4px 0 0 -4px;}
+        #profile {margin:20px 0 0 -140px;}
+    </style>
+    <![endif]-->
+    <style type="text/css">
+        body{background:url('');}
+    </style>
+    <script src="http://push.zhanzhang.baidu.com/push.js"></script><script type="text/javascript">window.onerror= function(){return true;}</script>            <script type="text/javascript" src="http://www.lvmae.com/lang/zh-cn/lang.js"></script>
+    <script type="text/javascript" src="http://www.lvmae.com/file/script/config.js"></script>
+    <script type="text/javascript" src="http://www.lvmae.com/file/script/jquery.js"></script>
+    <script type="text/javascript" src="http://www.lvmae.com/file/script/common.js"></script>
+    <script type="text/javascript" src="http://www.lvmae.com/file/script/admin.js"></script>
+    <script type="text/javascript" src="http://www.lvmae.com/file/script/member.js"></script>
+    <link rel="canonical" href="http://www.lvmae.com/member/register.php">
+</head>
+<body>
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+<div class="register">
+    <h2 class="register-title" style="border-bottom:#dedede solid 1px; padding-bottom: 20px;">
+        <a href="http://www.lvmae.com/" class="logo">绿蚂蚁logo</a>
+        <span>会员注册</span>
+        <label style="line-height:130px; float: right">我已经注册，现在就<a href="/comLoginList">登录</a></label>            </h2>
+    <script type="text/javascript" src="http://www.lvmae.com/file/script/login.js"></script>
+    <script type="text/javascript">var height_top=320;var basePath = "http://www.lvmae.com/";</script>
+    <script type="text/javascript" src="http://www.lvmae.com/file/script/register.js"></script>
+    <style type="text/css">.carousel_container ul li{height:320px;} body{background: url() #f6f6f6;}</style>
+    <!--引导 start-->
+    <div class="re-con">
+        <ul class="register-tips">
+            <li>
+                <a href="/regsFaHuo?types=1">发货方注册</a>
+                <p>类型：工厂、商贸、货代、三方物流/信息部、个人</p>
+            </li>
+            <li class="li2">
+                <a href="/regsWuLiu?types=2">物流公司注册</a>
+                <p>类型：专线物流公司</p>
+            </li>
+        </ul>
+        <div class="adimg"><img src="http://www.lvmae.com/file/upload/201707/24/15-25-45-21-40215.jpg" width="398" height="386" alt=""></div>
+    </div>
+    <!--引导 end-->
+    <form method="post" action="http://www.lvmae.com/member/login.php" id="login" target="_top" style="display: none">
+        <input type="hidden" name="forward" value="http://www.lvmae.com/member/">
+        <input type="hidden" name="username" value="">
+        <input type="hidden" name="password" value="">
+        <input type="hidden" name="auto" value="1">
+        <input type="hidden" name="captcha" value="">
+    </form>
+    <script type="text/javascript" src="http://www.lvmae.com/file/script/jquery.placeholder.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('input[name="post[inviter]"]').click(function(){
+                $("#err_inviter").html('');
+            });
+            $("#a_personal").click(function(e){
+                $(".tab-item").removeClass('tab-active');
+                $(this).addClass('tab-active');
+                $(".ddt").hide();
+                $("#personal").show();
+                $('input[name="register_type"]').val('personal');
+                jQuery('input[placeholder]').placeholder();
+                return false;
+            })
+            $("#a_bussiness").click(function(e){
+                $(".tab-item").removeClass('tab-active');
+                $(this).addClass('tab-active');
+                $(".ddt").hide();
+                $("#bussiness").show();
+                $('input[name="register_type"]').val('bussiness');
+                jQuery('input[placeholder]').placeholder();
+                return false;
+            })
+            $('input[name="post[type]"]').click(function(){
+                $('ul.re-class').show();
+                var _this = $(this);
+                $('ul.re-class li').click(function(){
+                    _this.val( $(this).text() )
+                    $(this).parent('ul').hide();
+                })
+            })
+            $(document).bind("click", function (e) {
+                var a = $(e.target).closest(['ul.re-class','input[name="post[type]"]']);
+                if (a.length == 0) {
+                    $('ul.re-class').hide();
+                }
+            });
+            $("#register").click(function(){
+                register();
+                return false;
+            })
+            $('a[class="imgYz"]').click(function(){
+                reloadcaptcha();
+            })
+        })
+    </script>
+</div>
+<!--页脚 start-->
+<div class="footer">
+    <div class="wrap">
+        <p><a href="http://www.lvmae.net" target="_blank" rel="nofollow">绿蚂蚁介绍</a><span class="line">|</span><a href="http://www.lvmae.net/list-10-1.html" target="_blank" rel="nofollow" title="大事记">大事记</a><span class="line">|</span><a href="http://www.lvmae.net/list-14-1.html" target="_blank" rel="nofollow" title="公司动态">公司动态</a><span class="line">|</span><a href="http://www.lvmae.net/list-13-1.html" target="_blank" rel="nofollow" title="媒体报道">媒体报道</a><span class="line">|</span><a href="http://www.lvmae.net" target="_blank" rel="nofollow" title="联系我们">联系我们</a><span class="line">|</span>
+        </p><dl onmouseover="this.className='a_mouseover'" onmouseout="this.className='a_mouseout'">
+        <dd><a href="http://www.lvmae.net/" target="_blank">绿蚂蚁官网</a></dd>
+        <dd><a href="http://www.lvmae.com/" target="_blank">绿蚂蚁物流</a></dd>
+        <dd><a href="http://kuaidi.lvmae.com/" target="_blank">绿蚂蚁快递</a></dd>
+        <dd><a href="http://ask.lvmae.com/" target="_blank">绿蚂蚁问答</a></dd>
+        <dt>绿蚂蚁旗下网站</dt>
+    </dl>
+        <p></p>
+        <p>Copyright © 绿蚂蚁干线<a href="http://www.lvmae.com">物流</a>B2B平台 All rights reserved. 粤ICP备14032800号-1</p>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#showchildren").mouseenter(function(){
+        $('div.more-site').show();
+    }).mouseleave(function(){
+        $('div.more-site').hide();
+    })
+</script>
+<span style="display:none;"><script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F113a0efbcb8d4e12dac632a3de270881' type='text/javascript'%3E%3C/script%3E"));
+var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254113276'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254113276' type='text/javascript'%3E%3C/script%3E"));</script><script src=" http://hm.baidu.com/h.js?113a0efbcb8d4e12dac632a3de270881" type="text/javascript"></script><span id="cnzz_stat_icon_1254113276"><a href="https://www.cnzz.com/stat/website.php?web_id=1254113276" target="_blank" title="站长统计">站长统计</a></span><script src=" http://s11.cnzz.com/z_stat.php?id=1254113276" type="text/javascript"></script><script src="http://c.cnzz.com/core.php?web_id=1254113276&amp;t=z" charset="utf-8" type="text/javascript"></script><script src="http://s95.cnzz.com/z_stat.php?id=1256389723&amp;web_id=1256389723" language="JavaScript"></script><script src="http://c.cnzz.com/core.php?web_id=1256389723&amp;t=z" charset="utf-8" type="text/javascript"></script><a href="https://www.cnzz.com/stat/website.php?web_id=1256389723" target="_blank" title="站长统计">站长统计</a></span>
+
+</body>
+</html>

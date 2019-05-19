@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jk.dao.UserMapper">
+    <!--判断该手机号是否注册过-->
+    <select id="findUserByPhone" parameterType="string" resultType="com.jk.pojo.UserBean">
+        select * from t_user where phoneNumber = #{value}
+    </select>
+    <!--判断用户注册类型-->
+    <select id="findRegType" resultType="com.jk.pojo.RegType">
+        select * from regType rt
+    </select>
+    <!--注册   发货方-->
+    <insert id="saveOneUser" parameterType="com.jk.pojo.UserBean">
+      insert into t_user(phoneNumber,password,types,referrer,sex,money,createTime,usertype)
+      values(#{phoneNumber},#{password},#{types},#{referrer},#{sex},#{money},#{createTime},#{usertype})
+    </insert>
+    <!--注册   物流公司-->
+    <insert id="saveComUser" parameterType="com.jk.pojo.UserBean">
+      insert into t_user(phoneNumber,password,companyName,referrer,money,createTime,usertype)
+      values(#{phoneNumber},#{password},#{companyName},#{referrer},#{money},#{createTime},#{usertype})
+    </insert>
+</mapper>

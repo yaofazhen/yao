@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>会员登录_</title>
+    <meta name="robots" content="nofollow">
+    <meta http-equiv="x-ua-compatible" content="IE=7">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="bookmark" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="http://www.lvmae.com/skin/default/index.css">
+    <link rel="stylesheet" type="text/css" href="http://www.lvmae.com/skin/default/index_plus.css">
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="http://www.lvmae.com/skin/default/ie6.css"/>
+    <![endif]-->
+    <!--[if IE]>
+    <style type="text/css">
+        .head_user em {margin:-4px 0 0 -4px;}
+        #profile {margin:20px 0 0 -140px;}
+    </style>
+    <![endif]-->
+    <style type="text/css">
+        body{background:url('');}
+    </style>
+    <script src="http://push.zhanzhang.baidu.com/push.js"></script><script type="text/javascript">window.onerror= function(){return true;}</script><script type="text/javascript" src="http://www.lvmae.com/lang/zh-cn/lang.js"></script>
+    <script type="text/javascript" src="http://www.lvmae.com/file/script/config.js"></script>
+    <script type="text/javascript" src="http://www.lvmae.com/file/script/jquery.js"></script>
+    <script type="text/javascript" src="http://www.lvmae.com/file/script/common.js"></script>
+    <script type="text/javascript" src="http://www.lvmae.com/file/script/admin.js"></script>
+    <script type="text/javascript" src="http://www.lvmae.com/file/script/member.js"></script>
+</head>
+<body style="background:''">
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+<div class="aspNetHidden">
+</div>
+<div style="display:none;">
+
+</div>
+<div style="display: none">
+    <iframe id="readCookie" name="readCookie" src=""></iframe>
+</div>
+<div class="index_container">
+    <!--顶部-->
+    <div class="regis_top">
+        <a href="http://www.lvmae.com/" class="regis_logo" title="绿蚂蚁快递"><img src="http://www.lvmae.com/skin/default/image/logo_regis.jpg" alt="绿蚂蚁LOGO"></a>
+        <p>绿蚂蚁 | 会员登录</p>
+    </div><script type="text/javascript">var height_top=450;</script>
+    <script type="text/javascript" src="http://www.lvmae.com/file/script/login.js"></script>
+    <!--中部-->
+    <div class="index_con regis_main">
+        <div class="login_container">
+            <p class="mid"><img src="http://www.lvmae.com/skin/default/image/login_h.jpg" alt="绿蚂蚁-用户登录"></p>
+            <form method="post" action="login.php" onsubmit="return Dcheck();">
+                <input name="forward" type="hidden" id="forward" value="http://www.lvmae.com/">
+                <table cellpadding="0" cellspacing="0">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <input name="phoneNumber" type="text" id="phoneNumberId" class="inp_grey  tipInput" placeholder="请输入手机号">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input name="password" type="password" id="passwordId" class="inp_grey tipInput" placeholder="请输入密码" style="color: black; display: inline-block;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="login_auto">
+                            <a href="send.php">忘记密码?</a>
+                            <input type="checkbox" name="remPwd" value="1" id="remPwdId">记住密码
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" id="submit" value="登 录 " class="btn_login">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="red" id="errorMess"></span></td>
+                    </tr>
+                    </tbody></table>
+            </form>
+            <p class="regis_Add">还没有绿蚂蚁账户？<a href="javascript:;" onclick="Go();">注册</a></p>
+        </div>
+        <div class="regis_ad">
+
+            <div class="carousel">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<script type="text/javascript">
+
+    $('#submit').click(function () {
+        var phoneNumber = $("#phoneNumberId").val();
+        var password = $("#passwordId").val();
+        var remPwd = $("#remPwdId").val();
+        $.ajax({
+            url:'/login',
+            type:"post",
+            data:{
+                phoneNumber:phoneNumber,
+                password:password,
+                remPwd:remPwd
+            },
+            success:function(data){
+                if (data.code == 0 ){
+                    alert(data.msg);
+                    location.href="/main"
+                }else{
+                    alert(data.msg);
+                }
+            }
+        })
+    });
+
+    /*点击注册去注册页面*/
+    function Go(){
+        location.href="/regs"
+    }
+</script>
+<div class="bottom">
+    <!--底部-->
+    <div class="bottom" id="bottomId">
+        <div class="index_container index_container_big" id="BottomWrap">
+            <div class="contact_bottom">
+                <p>客服电话</p>
+                <b>400-963-5600</b>
+                <p>
+                    <a id="t-weibo" href="http://t.qq.com/lvmae56" title="绿蚂蚁腾讯微博" target="_blank" rel="nofollow">绿蚂蚁腾讯微博</a>
+                    <a id="s-weibo" href="http://weibo.com/lvmae" title="绿蚂蚁新浪微博" target="_blank" rel="nofollow">绿蚂蚁新浪微博</a>
+                </p>
+            </div>
+            <div class="btn_bottom">
+                <h4>关于绿蚂蚁</h4>
+                <a href="http://www.lvmae.net/show-9-2-1.html" target="_blank" rel="nofollow" title="绿蚂蚁介绍">绿蚂蚁介绍</a>
+                <a href="http://www.lvmae.net/list-10-1.html" target="_blank" rel="nofollow" title="大事记">大事记</a>
+                <a href="http://www.lvmae.net/list-14-1.html" target="_blank" rel="nofollow" title="公司动态">公司动态</a>
+                <a href="http://www.lvmae.net/list-13-1.html" target="_blank" rel="nofollow" title="媒体报道">媒体报道</a>
+                <a href="http://www.lvmae.net/show-9-3-1.html" target="_blank" rel="nofollow" title="联系我们">联系我们</a>
+            </div>
+            <div class="btn_bottom">
+                <h4>绿蚂蚁旗下网站</h4>
+                <a href="http://www.lvmae.net/" target="_blank" title="绿蚂蚁官网">绿蚂蚁官网</a>
+                <a href="http://www.lvmae.com/" target="_blank" title="绿蚂蚁物流">绿蚂蚁物流</a>
+                <a href="http://kuaidi.lvmae.com/" target="_blank" title="绿蚂蚁快递">绿蚂蚁快递</a>
+                <a href="http://news.lvmae.com/" target="_blank" title="绿蚂蚁资讯">绿蚂蚁资讯</a>
+                <a href="http://ask.lvmae.com/" target="_blank" title="绿蚂蚁问答">绿蚂蚁问答</a>
+            </div>
+            <div class="btn_bottom">
+                <h4>绿蚂蚁物流</h4>
+                <a target="_blank" href="http://www.lvmae.com/" title="查物流">查物流</a>
+                <a target="_blank" href="http://www.lvmae.com/" title="物流搜索">物流搜索</a>
+                <a target="_blank" href="http://www.lvmae.com/road/gongsi" title="物流公司查询">物流公司查询</a>
+                <a target="_blank" href="http://www.lvmae.com/road/" title="公路物流查询">公路物流查询</a>
+                <a target="_blank" href="http://www.lvmae.com/" title="物流查询">物流查询</a>
+            </div>
+            <div class="btn_bottom">
+                <h4>绿蚂蚁快递</h4>
+                <a href="http://kuaidi.lvmae.com/" target="_blank" title="快递查询">快递查询</a>
+                <a href="http://kuaidi.lvmae.com/kuaidiyuan" target="_blank" title="附近快递员">附近快递员</a>
+                <a href="http://kuaidi.lvmae.com/kddh.html" target="_blank" title="快递电话">快递电话</a>
+                <a href="http://kuaidi.lvmae.com/kdwd.html" target="_blank" title="快递网点分布">快递网点分布</a>
+                <a href="http://kuaidi.lvmae.com/kdjg.html" target="_blank" title="快递费用查询">快递费用查询</a>
+            </div>
+            <div class="code_scan">
+                <img src="http://www.lvmae.com/skin/default/image/app_down.jpg" alt="绿蚂蚁二维码">
+                <p>扫一扫二维码</p>
+                <p>下载绿蚂蚁客户端</p>
+            </div>
+            <p class="statement">Copyright © 2015 绿蚂蚁物流搜索平台 All rights reserved. 粤ICP备14032800号-1&nbsp;&nbsp;</p>
+            <p class="statement"><a key="55cb19b7efbfb03c90332072" logo_size="124x47" logo_type="realname" href="https://v.pinpaibao.com.cn/authenticate/cert/?site=www.lvmae.com&amp;at=realname" target="_blank"><script src="http://static.anquan.org/static/outer/js/aq_auth.js"></script><b id="aqLogoKQOFJ" style="display: none;"></b><img src="//static.anquan.org/static/outer/image/sm_124x47.png?id=www.lvmae.com?t=39" alt="安全联盟认证" width="124" height="47" style="border: none;"></a></p>
+            <!--返回顶部右侧屏幕底部-->
+            <div class="back_to_up">
+                <a href="javascript:void(0);" title="返回顶部" id="backTop"><img src="http://www.lvmae.com/skin/default/image/back_to_up.jpg"></a>
+            </div>
+        </div>
+    </div>
+</div>
+<span style="display:none;"><script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F113a0efbcb8d4e12dac632a3de270881' type='text/javascript'%3E%3C/script%3E"));
+var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254113276'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254113276' type='text/javascript'%3E%3C/script%3E"));</script><script src=" http://hm.baidu.com/h.js?113a0efbcb8d4e12dac632a3de270881" type="text/javascript"></script><span id="cnzz_stat_icon_1254113276"><a href="https://www.cnzz.com/stat/website.php?web_id=1254113276" target="_blank" title="站长统计">站长统计</a></span><script src=" http://s11.cnzz.com/z_stat.php?id=1254113276" type="text/javascript"></script><script src="http://c.cnzz.com/core.php?web_id=1254113276&amp;t=z" charset="utf-8" type="text/javascript"></script><script src="http://s95.cnzz.com/z_stat.php?id=1256389723&amp;web_id=1256389723" language="JavaScript"></script><script src="http://c.cnzz.com/core.php?web_id=1256389723&amp;t=z" charset="utf-8" type="text/javascript"></script><a href="https://www.cnzz.com/stat/website.php?web_id=1256389723" target="_blank" title="站长统计">站长统计</a></span>
+</body>
+</html>
