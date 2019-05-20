@@ -1,38 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>会员注册_绿蚂蚁</title>
-
+    <meta name="robots" content="nofollow">
     <link rel="stylesheet" href="/js/easyui1.5/themes/icon.css">
     <link rel="stylesheet" href="/js/easyui1.5/themes/default/easyui.css">
-
     <!-- 基于jquery所以先导jquery标签 -->
     <script src="/js/easyui1.5/jquery.min.js"></script>
     <!--， 主要包  不可少 调用easyui  方法--->
     <script src="/js/easyui1.5/jquery.easyui.min.js"></script>
     <!-- 导入easyui 语言包   locale:方言    必须在最下面-->
     <script src="/js/easyui1.5/locale/easyui-lang-zh_CN.js"></script>
-    <style>
-        .name.btn {
-            position: absolute;
-            font-size: .34rem;
-            color: #fbb111;
-            background: none;
-            outline: none;
-            border: none;
-        }
-        .name.btn:disabled {
-            color: #cd0a0a;
-        }
-    </style>
-    <meta name="robots" content="nofollow"/>
-    <meta http-equiv="x-ua-compatible" content="IE=7"/>
-    <link rel="shortcut icon" type="image/x-icon" href="http://www.lvmae.com//favicon.ico" />
-    <link rel="bookmark"  type="image/x-icon" href="http://www.lvmae.com//favicon.ico"/>
-    <link rel="stylesheet" type="text/css" href="http://www.lvmae.com/skin/default/index.css"/>
-    <link rel="stylesheet" type="text/css" href="http://www.lvmae.com/skin/default/index_plus.css"/>
-    <link rel="stylesheet" type="text/css" href="http://www.lvmae.com/skin/default/register.css"/>
+    <meta http-equiv="x-ua-compatible" content="IE=7">
+    <script src="/jquery-1.9.1.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="http://www.lvmae.com//favicon.ico">
+    <link rel="bookmark" type="image/x-icon" href="http://www.lvmae.com//favicon.ico">
+    <link rel="stylesheet" type="text/css" href="http://www.lvmae.com/skin/default/index.css">
+    <link rel="stylesheet" type="text/css" href="http://www.lvmae.com/skin/default/index_plus.css">
+    <link rel="stylesheet" type="text/css" href="http://www.lvmae.com/skin/default/register.css">
+    <!-- 基于jquery所以先导jquery标签 -->
+    <script src="/js/easyui1.5/jquery.min.js"></script>
+    <!--， 主要包  不可少 调用easyui  方法--->
+    <script src="/js/easyui1.5/jquery.easyui.min.js"></script>
+    <!-- 导入easyui 语言包   locale:方言    必须在最下面-->
+    <script src="/js/easyui1.5/locale/easyui-lang-zh_CN.js"></script>
     <!--[if lte IE 6]>
     <link rel="stylesheet" type="text/css" href="http://www.lvmae.com/skin/default/ie6.css"/>
     <![endif]-->
@@ -45,13 +37,15 @@
     <style type="text/css">
         body{background:url('');}
     </style>
-    <script type="text/javascript">window.onerror= function(){return true;}</script>            <script type="text/javascript" src="http://www.lvmae.com/lang/zh-cn/lang.js"></script>
+    <script src="http://push.zhanzhang.baidu.com/push.js"></script><script type="text/javascript">window.onerror= function(){return true;}</script>            <script type="text/javascript" src="http://www.lvmae.com/lang/zh-cn/lang.js"></script>
     <script type="text/javascript" src="http://www.lvmae.com/file/script/config.js"></script>
     <script type="text/javascript" src="http://www.lvmae.com/file/script/jquery.js"></script>
     <script type="text/javascript" src="http://www.lvmae.com/file/script/common.js"></script>
     <script type="text/javascript" src="http://www.lvmae.com/file/script/admin.js"></script>
     <script type="text/javascript" src="http://www.lvmae.com/file/script/member.js"></script>
-    <link rel="canonical" href="http://www.lvmae.com/member/register.php"/>        </head>
+    <link rel="canonical" href="http://www.lvmae.com/member/register.php">
+
+</head>
 <body>
 <script>
     (function(){
@@ -68,7 +62,8 @@
     })();
 </script>
 <div class="register">
-    <h2 class="register-title" >
+    <input th:value="${usertype}"  type="hidden" id="phoneNumberId" class="inp_grey  tipInput" >
+    <h2 class="register-title">
         <a href="http://www.lvmae.com/" class="logo">绿蚂蚁logo</a>
         <span>会员注册</span>
     </h2>
@@ -78,24 +73,37 @@
     <style type="text/css">.carousel_container ul li{height:320px;} body{background: url() #f6f6f6;}</style>
     <div class="my-tab-1-box">
         <ul class="my-tab-1 clearfix" id="tabTitle1">
-            <li  class="tab-item fl   " style="border-right:none"><a href="/regsFaHuo">发货方</a></li>
-            <li  class="tab-item fl   tab-active"><a href="/regsWuLiu">物流公司</a></li>
+            <li id="a_personal" class="tab-item fl   tab-active" style="border-right:none"><a href="/regsFaHuo">发货方</a></li>
+            <li id="a_bussiness" th:class="${usertype}==1?'tab-item fl':'tab-item fl   tab-active'"><a href="/regsWuLiu">物流公司</a></li>
             <li class="login">我已经注册，现在就<a href="/comLoginList">登录</a></li>
         </ul>
         <div class="tab-content tab-active" style="height: 510px">
-            <form id="regForm" method="post" >
+            <form id="regForm" method="post">
                 <ul>
                     <li><span><i>*</i>手机</span><input class="txt" type="text" maxlength="11" name="phoneNumber" id="phoneNumber" placeholder="完后您可以用该手机号登录或找回密码" value=""><p id="phoneNumber_eorrmsg"></p></li>
                     <li><span><i>*</i>短信验证码</span><span><input type="text" name="phonecode" maxlength="6" id="phonecode" placeholder="请输入验证码"/></span><span><button type="button" class="name btn">获取验证码</button></span><p id="err_smscode"></p></li>
                     <li><span><i>*</i>请设置密码</span><input class="txt" name="password" id="password" type="password" maxlength="18" placeholder="6-18位字符，建议由字母、数字和符号两者以上组合" value=""><p id="err_pwd"></p></li>
-                    <li><span><i>*</i>请确认密码</span><input class="txt" name="password2" id="cpassword" type="password" maxlength="18" placeholder="请再次输入密码" value=""><p id="err_pwd2"></p></li>
-                    <li  id="bussiness" class="ddt" ><span><i>*</i>公司名称</span><input onkeyup="value=value.replace(/[^\w\u4E00-\u9FA5]/g, '')" class="txt" type="text"   name="companyName" placeholder="公司名称不能含有特殊字符" value="" /><p  id="err_company"></p></li>
-                    <li><span><i></i>推荐人</span><input onKeyUp="value=value.replace(/[^A-Z0-9]/g,'')" class="txt" type="text"   name="post[inviter]" placeholder="请输入推荐人会员号" value="" /><p  id="err_inviter"></p></li>
-                    <li><input class="agree" type="checkbox" value="1" name="agree" checked="checked" />我已阅读并同意<a target="_blank" href="http://kuaidi.lvmae.com/form/common/userserviceagreement.aspx">《绿蚂蚁用户服务协议》</a> <p  id="err_agress"></p></li>
+                    <li><span><i>*</i>请确认密码</span><input class="txt" name="password2" id="cpassword2" type="password" maxlength="18" placeholder="请再次输入密码" value=""><p id="err_pwd2"></p></li>
+                    <li id="personal" class="register-class ddt">
+                        <span><i>*</i>注册类型</span>
+                        <input class="txt yzm" type="text" placeholder="请选择类型" value name="types">
+                        <label class="yy">^</label>
+                        <ul class="re-class" style="display: none">
+                            <li>工厂</li>
+                            <li>商贸</li>
+                            <li>货代</li>
+                            <li>三方物流/信息部</li>
+                            <li>个人</li>
+                        </ul>
+                        <p id="err_type"></p>
+                    </li>
+                    <li id="bussiness" class="ddt" style="display:none"><span><i>*</i>公司名称</span><input class="txt" type="text" name="companyName" placeholder="公司名称不能含有特殊字符和数字" value=""><p id="err_company"></p></li>
+                    <li><span><i></i>推荐人</span><input class="txt" type="text" name="referrer" placeholder="请输入推荐人会员号" value=""><p id="err_inviter"></p></li>
+                    <li><input class="agree" type="checkbox" value="1" name="agree" checked="checked">我已阅读并同意<a target="_blank" href="http://kuaidi.lvmae.com/form/common/userserviceagreement.aspx">《绿蚂蚁用户服务协议》</a> <p id="err_agress"></p></li>
                 </ul>
-                <div><input type="button"  onclick="addlast()" value="立即注册"/></div>
-                <input name="register_type" type="hidden" value="bussiness">
-                <input name="action" type="hidden" id="action" value="42de3f7435a8687754b6448f1f687285"/>
+                <div><input type="submit" id="register"  onclick="add()" value="立即注册"></div>
+                <input name="register_type" type="hidden" value="personal">
+                <input name="action" type="hidden" id="action" value="fd7ebcbd63fae5dd4cf4ab047fefa724">
             </form>
             <div class="adimg"></div>
         </div>
@@ -113,61 +121,16 @@
     </div>
     <!--承运商认领提示层 end-->
     <form method="post" action="http://www.lvmae.com/member/login.php" id="login" target="_top" style="display: none">
-        <input type="hidden" name="forward" value="http://www.lvmae.com/member/"/>
-        <input type="hidden" name="username" value=""/>
-        <input type="hidden" name="password" value=""/>
-        <input type="hidden" name="auto" value="1"/>
-        <input type="hidden" name="captcha" value=""/>
+        <input type="hidden" name="forward" value="http://www.lvmae.com/member/">
+        <input type="hidden" name="username" value="">
+        <input type="hidden" name="password" value="">
+        <input type="hidden" name="auto" value="1">
+        <input type="hidden" name="captcha" value="">
     </form>
     <script type="text/javascript" src="http://www.lvmae.com/file/script/jquery.placeholder.js"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
-            $('input[name="inviter"]').click(function(){
-                $("#err_inviter").html('');
-            });
-            $("#a_personal").click(function(e){
-                $(".tab-item").removeClass('tab-active');
-                $(this).addClass('tab-active');
-                $(".ddt").hide();
-                $("#personal").show();
-                $('input[name="register_type"]').val('personal');
-                jQuery('input[placeholder]').placeholder();
-                return false;
-            })
-            $("#a_bussiness").click(function(e){
-                $(".tab-item").removeClass('tab-active');
-                $(this).addClass('tab-active');
-                $(".ddt").hide();
-                $("#bussiness").show();
-                $('input[name="register_type"]').val('bussiness');
-                jQuery('input[placeholder]').placeholder();
-                return false;
-            })
-            $('input[name="types"]').click(function(){
-                $('ul.re-class').show();
-                var _this = $(this);
-                $('ul.re-class li').click(function(){
-                    _this.val( $(this).text() )
-                    $(this).parent('ul').hide();
-                })
-            })
-            $(document).bind("click", function (e) {
-                var a = $(e.target).closest(['ul.re-class','input[name="post[types]"]']);
-                if (a.length == 0) {
-                    $('ul.re-class').hide();
-                }
-            });
-            $("#register").click(function(){
-                register();
-                return false;
-            })
-            $('a[class="imgYz"]').click(function(){
-                reloadcaptcha();
-            })
-        })
 
-        function addlast() {
-            var usertype=2
+        function add() {
             var phoneNumber=$("input[name='phoneNumber']").val();
             var pass1=$("input[name='password']").val();
             var pass2=$("input[name='password2']").val();
@@ -175,13 +138,12 @@
             var types=$("input[name='types']").val();
             var phonecode=$("input[name='phonecode']").val();
             var reg =/(^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$)/g;
-            if (phoneNumber != '' && pass1 != '' && pass2 != '' && phonecode != '' && types !='') {
-
-                /* phoneNumber_eorrmsg
-                 if(phoneNumber == null){
-                     $("#username_eorrmsg").html("请填写手机号码");
-                     return null;
-                 }*/
+            if(companyName != null && companyName !=''){
+                var usertype=2;
+            }else {
+                var usertype=1;
+            }
+            if (phoneNumber != '' && pass1 != '' && pass2 != '' && phonecode != '') {
                 if(pass1 != pass2){
                     alert("密码不一致");
                     return false;
@@ -267,20 +229,76 @@
                 }
             }
         })
+        $(function () {
+            var phoneNumberId = $("#phoneNumberId").val();
+            if(phoneNumberId==2){
+                $(".tab-item").removeClass('tab-active');
+                $("#a_bussiness").addClass('tab-active');
+                $(".ddt").hide();
+                $("#bussiness").show();
+                $('input[name="register_type"]').val('bussiness');
+                jQuery('input[placeholder]').placeholder();
+                return false;
+            }
+        })
+        $(document).ready(function(){
+            $('input[name="inviter"]').click(function(){
+                $("#err_inviter").html('');
+            });
+            $("#a_personal").click(function(e){
+                $(".tab-item").removeClass('tab-active');
+                $(this).addClass('tab-active');
+                $(".ddt").hide();
+                $("#personal").show();
+                $('input[name="register_type"]').val('personal');
+                jQuery('input[placeholder]').placeholder();
+                return false;
+            })
+            $("#a_bussiness").click(function(e){
+                $(".tab-item").removeClass('tab-active');
+                $(this).addClass('tab-active');
+                $(".ddt").hide();
+                $("#bussiness").show();
+                $('input[name="register_type"]').val('bussiness');
+                jQuery('input[placeholder]').placeholder();
+                return false;
+            })
+            $('input[name="types"]').click(function(){
+                $('ul.re-class').show();
+                var _this = $(this);
+                $('ul.re-class li').click(function(){
+                    _this.val( $(this).text() )
+                    $(this).parent('ul').hide();
+                })
+            })
+            $(document).bind("click", function (e) {
+                var a = $(e.target).closest(['ul.re-class','input[name="types"]']);
+                if (a.length == 0) {
+                    $('ul.re-class').hide();
+                }
+            });
+            $("#register").click(function(){
+                register();
+                return false;
+            })
+            $('a[class="imgYz"]').click(function(){
+                reloadcaptcha();
+            })
+        })
     </script>
 </div>
 <!--页脚 start-->
 <div class="footer">
     <div class="wrap">
-        <p><a  href="http://www.lvmae.net" target="_blank" rel="nofollow">绿蚂蚁介绍</a><span class="line">|</span><a  href="http://www.lvmae.net/list-10-1.html" target="_blank" rel="nofollow" title="大事记">大事记</a><span class="line">|</span><a href="http://www.lvmae.net/list-14-1.html" target="_blank" rel="nofollow" title="公司动态">公司动态</a><span class="line">|</span><a  href="http://www.lvmae.net/list-13-1.html" target="_blank" rel="nofollow" title="媒体报道">媒体报道</a><span class="line">|</span><a  href="http://www.lvmae.net" target="_blank" rel="nofollow" title="联系我们">联系我们</a><span class="line">|</span>
-        <dl onMouseOver="this.className='a_mouseover'" onMouseOut="this.className='a_mouseout'">
-            <dd><a href="http://www.lvmae.net/" target="_blank">绿蚂蚁官网</a></dd>
-            <dd><a href="http://www.lvmae.com/" target="_blank">绿蚂蚁物流</a></dd>
-            <dd><a href="http://kuaidi.lvmae.com/" target="_blank">绿蚂蚁快递</a></dd>
-            <dd><a href="http://ask.lvmae.com/"target="_blank">绿蚂蚁问答</a></dd>
-            <dt>绿蚂蚁旗下网站</dt>
-        </dl>
-        </p>
+        <p><a href="http://www.lvmae.net" target="_blank" rel="nofollow">绿蚂蚁介绍</a><span class="line">|</span><a href="http://www.lvmae.net/list-10-1.html" target="_blank" rel="nofollow" title="大事记">大事记</a><span class="line">|</span><a href="http://www.lvmae.net/list-14-1.html" target="_blank" rel="nofollow" title="公司动态">公司动态</a><span class="line">|</span><a href="http://www.lvmae.net/list-13-1.html" target="_blank" rel="nofollow" title="媒体报道">媒体报道</a><span class="line">|</span><a href="http://www.lvmae.net" target="_blank" rel="nofollow" title="联系我们">联系我们</a><span class="line">|</span>
+        </p><dl onmouseover="this.className='a_mouseover'" onmouseout="this.className='a_mouseout'">
+        <dd><a href="http://www.lvmae.net/" target="_blank">绿蚂蚁官网</a></dd>
+        <dd><a href="http://www.lvmae.com/" target="_blank">绿蚂蚁物流</a></dd>
+        <dd><a href="http://kuaidi.lvmae.com/" target="_blank">绿蚂蚁快递</a></dd>
+        <dd><a href="http://ask.lvmae.com/" target="_blank">绿蚂蚁问答</a></dd>
+        <dt>绿蚂蚁旗下网站</dt>
+    </dl>
+        <p></p>
         <p>Copyright © 绿蚂蚁干线<a href="http://www.lvmae.com">物流</a>B2B平台 All rights reserved. 粤ICP备14032800号-1</p>
     </div>
 </div>
@@ -294,6 +312,7 @@
 <span style="display:none;"><script type="text/javascript">
 var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
 document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F113a0efbcb8d4e12dac632a3de270881' type='text/javascript'%3E%3C/script%3E"));
-var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254113276'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254113276' type='text/javascript'%3E%3C/script%3E"));</script><script src="http://s95.cnzz.com/z_stat.php?id=1256389723&web_id=1256389723" language="JavaScript"></script></span>
+var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254113276'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254113276' type='text/javascript'%3E%3C/script%3E"));</script><script src=" http://hm.baidu.com/h.js?113a0efbcb8d4e12dac632a3de270881" type="text/javascript"></script><span id="cnzz_stat_icon_1254113276"><a href="https://www.cnzz.com/stat/website.php?web_id=1254113276" target="_blank" title="站长统计">站长统计</a></span><script src=" http://s11.cnzz.com/z_stat.php?id=1254113276" type="text/javascript"></script><script src="http://c.cnzz.com/core.php?web_id=1254113276&amp;t=z" charset="utf-8" type="text/javascript"></script><script src="http://s95.cnzz.com/z_stat.php?id=1256389723&amp;web_id=1256389723" language="JavaScript"></script><script src="http://c.cnzz.com/core.php?web_id=1256389723&amp;t=z" charset="utf-8" type="text/javascript"></script><a href="https://www.cnzz.com/stat/website.php?web_id=1256389723" target="_blank" title="站长统计">站长统计</a></span>
+
 </body>
 </html>

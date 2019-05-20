@@ -1,17 +1,16 @@
 package com.jk.service;
 
 import com.alibaba.druid.util.StringUtils;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.jk.ConstantConf;
 import com.jk.dao.UserMapper;
 import com.jk.pojo.PhoneCount;
 import com.jk.pojo.RegType;
 import com.jk.pojo.UserBean;
-import com.jk.utils.HttpClientUtil;
 import com.jk.utils.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -54,6 +53,14 @@ public class UserServiceImpl implements UserService {
         HashMap<String, Object> hash = new HashMap<>();
         Date date = new Date();
 
+        //在mongodb根据手机号条查手机号是否在mongodb中
+        List<PhoneCount> phoneNumber1 = mongoTemplate.find(new Query().addCriteria(Criteria.where("phoneNumber").is(phoneNumber)), PhoneCount.class);
+        if(phoneNumber1.size()>0){
+            hash.put("code", 1);
+            hash.put("msg", "该手机号在黑名单,请联系管理员");
+            return hash;
+        }
+
         //判断是否今天三次上限
         SimpleDateFormat si = new SimpleDateFormat("yyyy-MM-dd");
         String format = si.format(date);
@@ -77,7 +84,9 @@ public class UserServiceImpl implements UserService {
         }
         Integer randomNumber = (int) (Math.random() * 899999 + 100000);
         System.out.println(randomNumber);
-        HashMap<String, Object> params = new HashMap<>();
+
+       /*  HashMap<String, Object> params = new HashMap<>();
+         *//*发送短信*//*
         params.put("accountSid",ConstantConf.ACCOUNTSID);
         params.put("to",phoneNumber);
         String timestamp=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
@@ -89,9 +98,10 @@ public class UserServiceImpl implements UserService {
         String string = HttpClientUtil.post(ConstantConf.SMS_URL,params);
 
         System.out.println(string);
+
         JSONObject parseObject = JSON.parseObject(string);
         String string2 = parseObject.getString("respCode");
-        if(ConstantConf.SMS_SUCCESS.equals(string2)) {
+        if(ConstantConf.SMS_SUCCESS.equals(string2)) {*/
         String s = randomNumber.toString();
         redis.set(phoneNumber, s);
         redis.expire(phoneNumber, 60);
@@ -101,11 +111,11 @@ public class UserServiceImpl implements UserService {
         hash.put("code", 0);
         hash.put("msg", "短信发送成功，一分钟内有效");
         return hash;
-       }else {
+      /* }else {
             hash.put("code", 1);
             hash.put("msg", "发送失败");
             return hash;
-        }
+        }*/
     }
 
     //用户注册类型
@@ -135,13 +145,13 @@ public class UserServiceImpl implements UserService {
                 hash.put("msg", "短信验证码错误");
                 return hash;
             }
-            //判断用户选择的类型
-            Integer type = userBean.getUsertype();
+            //判断用户选择的类型  1发货方 2物流
+            Integer usertype = userBean.getUsertype();
             userBean.setCreateTime(new Date());
             userBean.setMoney(0.00);
             String md516 = Md5Util.getMd516(userBean.getPassword());//密码加密
             userBean.setPassword(md516);
-            if (type == 1) {
+            if (usertype == 1) {
                 userBean.setSex(1);
                 userMapper.saveOneUser(userBean);//注册发货方
             } else {
